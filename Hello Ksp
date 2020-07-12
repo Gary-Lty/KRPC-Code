@@ -1,0 +1,25 @@
+using KRPC.Client;
+using KRPC.Client.Services.KRPC;
+using System;
+
+namespace KRPC
+{
+    using static Console;
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            var serverName = "Demo";//这是我们更改的服务器名字
+            WriteLine("Start Connect:" + serverName);
+            //因为没有改动IP和端口号，就不用输入了
+            using (var conn = new Connection(name: serverName))//选择使用我们写好的服务器名字
+            {
+                WriteLine("Hello ksp");
+                var krpc = conn.KRPC();//获得服务器实例
+                WriteLine("服务器版本是：" + krpc.GetStatus().Version);
+            }
+            WriteLine("Connect end");
+            ReadKey();
+        }
+    }
+}
